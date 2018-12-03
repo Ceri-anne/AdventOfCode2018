@@ -34,4 +34,58 @@ let part1 = doublesCount * triplesCount
 print(part1)
 
 
+func checkOneDifferent(_ string1: String, _ string2: String) -> Bool {
+    guard string1.count == string2.count else {
+        return false
+    }
+    
+    var count = 0
+    
+    for i in 0..<string1.count {
+        if Array(string1)[i] != Array(string2)[i] {
+            count += 1
+        }
+        if count > 1 {
+            return false
+        }
+    }
+    
+    return count == 1
 
+}
+
+func findOneDifferent(from array: [String]) -> [String] {
+
+    var resultArray = [String]()
+    
+    for i in 0..<array.count {
+        
+        for j in 0..<array.count {
+            
+            if j != i && checkOneDifferent(array[i],array[j]) == true {
+                resultArray.append(array[i])
+            }
+        }
+
+    }
+    return resultArray
+}
+
+
+let oneDifferent = findOneDifferent(from: inputArray)
+
+func findMatchingString(_ string1: String, _ string2: String) -> String {
+   
+    var result = ""
+    for i in 0..<string1.count {
+        if Array(string1)[i] == Array(string2)[i] {
+            result.append(Array(string1)[i])
+        }
+    }
+    
+    return result
+    
+}
+
+let part2 = findMatchingString(oneDifferent[0], oneDifferent[1])
+print(part2)
